@@ -1,0 +1,22 @@
+name: Daily Commit Job
+
+on:
+  schedule:
+    - cron: '30 14 * * *'  # Runs daily at 14:30 UTC (adjust timezone offset as needed)
+  
+jobs:
+  commit-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Step-with-email-23f3004024@ds.study.iitm.ac.in
+      run: |
+        echo "Generating commit..."
+        echo "Daily commit at $(date)" >> commit-log.txt
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add commit-log.txt
+        git commit -m "Automated daily commit"
+        git push
